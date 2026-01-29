@@ -1,20 +1,53 @@
 # gbdk-playing-sounds
 GBDK simple playing sounds
 
+## Requirements
+- Windows OS
+- GBDK-2020 >= 4.5.0
+- CMake >= 4.2.1
+- GNU Make >= 4.4.1
+
+**TIPS:** You can use [Chocolatey](https://community.chocolatey.org/) to install CMake and GNU Make easily: `choco install cmake` `choco install make`
+
 ## Build Instructions
-Place gbdk for Windows in the `C:\gbdk` directory, then run this command in PowerShell:
 
+### Prerequisites
+Extract GBDK-2020 for Windows in the `C:\gbdk` directory.
+
+### Quick Build
+Run the build script using PowerShell:
+
+```powershell
+.\build.ps1
 ```
-C:\gbdk\bin\lcc.exe -c -o main.o main.c
-C:\gbdk\bin\lcc.exe -c -o BallSprite.o BallSprite.c
-C:\gbdk\bin\lcc.exe -o rom.gb main.o BallSprite.o
+
+Optional flags:
+- `-clean` - Clean build artifacts before building
+- `-debug` - Build in debug mode
+
+Example:
+```powershell
+.\build.ps1 -clean -debug
 ```
 
-or just run `build.ps1`
+This will generate `rom.gb` in the `build` directory, which can be loaded into an emulator or flashcart.
 
-This will create `rom.gb`, which can be loaded into an emulator or flashcart.
+### Manual Build
+To build manually using CMake:
 
-## Convert PNG into GBDK asset
+```powershell
+mkdir build
+cd build
+cmake .. -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release
+make
+cd ..
+```
+
+Use `-DCMAKE_BUILD_TYPE=Debug` for debug build.
+
+## Generate Graphics Assets
+
+To generate assets file from png we use png2asset, here are the commands we use:
 ```
 C:\gbdk\bin\png2asset.exe .\BallSprite.png -spr8x8
 ```

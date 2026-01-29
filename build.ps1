@@ -1,3 +1,16 @@
-C:\gbdk\bin\lcc.exe -c -o main.o main.c
-C:\gbdk\bin\lcc.exe -c -o BallSprite.o BallSprite.c
-C:\gbdk\bin\lcc.exe -o rom.gb main.o BallSprite.o
+param(
+    [switch]$Debug,
+    [switch]$Clean
+)
+
+if ($Clean) {
+    rm -Recurse -Force build -ErrorAction SilentlyContinue
+}
+
+$buildType = if ($Debug) { "Debug" } else { "Release" }
+
+mkdir build -Force
+cd build
+cmake .. -G "Unix Makefiles" -DCMAKE_BUILD_TYPE="$buildType"
+make
+cd ..

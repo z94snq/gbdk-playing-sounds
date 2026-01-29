@@ -1,5 +1,5 @@
 #include <gb/gb.h>
-#include "BallSprite.h"
+#include "graphics/BallSprite.h"
 
 uint8_t spriteX, spriteY;
 int8_t velocityX, velocityY;

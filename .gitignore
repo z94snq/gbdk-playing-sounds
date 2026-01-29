@@ -1,8 +1,1 @@
-.vscode/
-*.gb
-*.o
-*.lst
-*.sym
-*.asm
-*.ihx
-*.map
+build/
